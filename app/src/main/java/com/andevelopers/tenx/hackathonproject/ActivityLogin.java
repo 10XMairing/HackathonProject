@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -14,6 +16,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ActivityLogin extends AppCompatActivity {
 
@@ -23,6 +35,13 @@ public class ActivityLogin extends AppCompatActivity {
     private static final int KEY_STUDENT = 1;
     private static final int KEY_TEACHER = 2;
 
+
+
+    private static final String TAG = "LoginActivity";
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    CollectionReference teachersRef = db.collection("teachers");
+    CollectionReference studentsRef = db.collection("students");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,17 +58,12 @@ public class ActivityLogin extends AppCompatActivity {
             public void onClick(View v) {
                 showDialog("Student Login", ActivityLogin.this, KEY_STUDENT);
 
-
             }
         });
         btnTeacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
               showDialog("Teacher Login", ActivityLogin.this, KEY_TEACHER);
-
-
-
-
 
             }
         });
@@ -87,14 +101,14 @@ public class ActivityLogin extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = tvName.getText().toString();
+                String name = tvName.getText().toString().toLowerCase();
                 if(!name.equals("")){
                     if(key == 1){
                         dialog.dismiss();
-                        loginAsStudent(name);
+                        checkAndLogIn(name, KEY_STUDENT);
                     }else if(key == 2){
                         dialog.dismiss();
-                        loginAsTeacher(name);
+                        checkAndLogIn(name, KEY_TEACHER);
                     }
                 }else {
                     Toast.makeText(ActivityLogin.this, "Enter a valid name", Toast.LENGTH_SHORT).show();
@@ -106,22 +120,67 @@ public class ActivityLogin extends AppCompatActivity {
 
     }
 
-    public void loginAsStudent(String name){
-        Intent intent = new Intent(ActivityLogin.this, ActivityHome.class);
-        intent.putExtra(ActivityHome.LOGIN_KEY, 1);
+    public void checkAndLogIn(final String name, final int logKey){
+        final CollectionReference ref;
+        if(logKey == KEY_STUDENT){
+            ref = studentsRef;
+
+        }else {
+            ref = teachersRef;
+        }
+
         //TODO check for users in database -> add a new one if name doesnt exits and create a new id -> else login with the same id
+        ref.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+            if(task.isSuccessful()){
+                QuerySnapshot query = task.getResult();
+                int flag = -1;
+                for(QueryDocumentSnapshot doc : query){
+                    String userID = doc.getId();
+                    if(userID.equals(name)){
+                        flag = 1;
+                        break;
+                    }
+                }
+
+                if(flag != 1){
+                    //user doesnot exist , create new document
+                    Map<String, Object> user = new HashMap<>();
+                    user.put("name", name);
+                    Log.d(TAG, "user not found");
+                    ref.document(name).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                               goNext(name, logKey);
+                                Toast.makeText(ActivityLogin.this, "Created new user / Logged in", Toast.LENGTH_SHORT).show();
+
+                            }else {
+                                Toast.makeText(ActivityLogin.this, "Error", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+                }else {
+                    //user exists --> simply go to new activity
+                    Toast.makeText(ActivityLogin.this, "logging in as existing user", Toast.LENGTH_SHORT).show();
+                    goNext(name, logKey);
+
+                }
+            }
+
+            }
+        });
+
+    }
+
+    public void goNext(String name, int key){
+        Intent intent = new Intent(ActivityLogin.this, ActivityHome.class);
+        intent.putExtra(ActivityHome.KEY_LOGIN, key);
+        intent.putExtra(ActivityHome.KEY_NAME, name);
         startActivity(intent);
         finish();
     }
-    public void loginAsTeacher(String name){
-        Intent intent = new Intent(ActivityLogin.this, ActivityHome.class);
-        intent.putExtra(ActivityHome.LOGIN_KEY, 2);
-        //TODO check for users in database -> add a new one if name doesnt exits and create a new id -> else login with the same id
-        startActivity(intent);
-        finish();
-    }
-
-
-
 
 }
