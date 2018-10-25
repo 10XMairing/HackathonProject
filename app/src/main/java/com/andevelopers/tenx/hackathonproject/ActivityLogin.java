@@ -107,17 +107,17 @@ public class ActivityLogin extends AppCompatActivity {
     }
 
     public void loginAsStudent(String name){
-        Intent intent = new Intent();
+        Intent intent = new Intent(ActivityLogin.this, ActivityHome.class);
         intent.putExtra(ActivityHome.LOGIN_KEY, 1);
         //TODO check for users in database -> add a new one if name doesnt exits and create a new id -> else login with the same id
-        setResult(Activity.RESULT_OK, intent);
+        startActivity(intent);
         finish();
     }
     public void loginAsTeacher(String name){
-        Intent intent = new Intent();
+        Intent intent = new Intent(ActivityLogin.this, ActivityHome.class);
         intent.putExtra(ActivityHome.LOGIN_KEY, 2);
         //TODO check for users in database -> add a new one if name doesnt exits and create a new id -> else login with the same id
-        setResult(Activity.RESULT_OK, intent);
+        startActivity(intent);
         finish();
     }
 

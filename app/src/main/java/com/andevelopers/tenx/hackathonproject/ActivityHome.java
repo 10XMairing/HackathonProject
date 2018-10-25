@@ -16,22 +16,15 @@ public class ActivityHome extends AppCompatActivity {
     private static int id;
     public static final String LOGIN_KEY = "log_key";
     public static final String TAG = "ActivityHome";
-    public static final int REQUEST_CODE = 122;
-    SharedPreferences sPref;
-    SharedPreferences.Editor editor;
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-
-
-        //test
-        sPref = getPreferences(Context.MODE_PRIVATE);
-
-        id = sPref.getInt(LOGIN_KEY, -1);
+        id = getIntent().getIntExtra(LOGIN_KEY, -1);
         Log.d(TAG, "user id : "+id);
         if(id == -1){
             goLogin();
@@ -55,31 +48,11 @@ public class ActivityHome extends AppCompatActivity {
         goLogin();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "OnActivityResult called");
-        if(requestCode == REQUEST_CODE){
-            if(resultCode == Activity.RESULT_OK){
-                assert data != null;
-                int returnInt = data.getIntExtra(LOGIN_KEY, -1);
-                editor = sPref.edit();
-                editor.putInt(LOGIN_KEY, returnInt);
-                editor.apply();
-                Log.d(TAG, "recieved key : --> "+returnInt);
-                showFragment(returnInt);
 
-            }
-        }
-
-    }
 
     public void goLogin(){
         Intent intent = new Intent(ActivityHome.this, ActivityLogin.class);
-        sPref.edit().clear().apply();
-        id = -1;
         startActivity(intent);
-        startActivityForResult(intent, REQUEST_CODE);
 
     }
 
