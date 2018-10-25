@@ -34,8 +34,6 @@ public class ActivityHome extends AppCompatActivity {
 
         //setting up the fragments
 
-
-
     }
 
     @Override
