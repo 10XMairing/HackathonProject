@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ActivityLogin" />
-        <activity android:name=".ActivityStudenProfile"></activity>
+        <activity android:name=".ActivityStudenProfile" />
+        <activity android:name=".ActivityMenuSubs"></activity>
     </application>
 
 </manifest>

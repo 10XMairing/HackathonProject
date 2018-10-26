@@ -88,12 +88,12 @@
                 android:background="@drawable/bg_lower_border"
                 />
             <TextView
-                android:id="@+id/tv_todo"
+                android:id="@+id/tv_teacher_forum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:layout_margin="10dp"
-                android:text="Todo Preclass / Notifify students"
+                android:text="Students Discussion Forum"
                 android:textSize="@dimen/textsize"
                 android:background="@drawable/bg_lower_border"
                 />
@@ -136,7 +136,7 @@
                 android:text="LOGOUT"
                 android:textSize="@dimen/textsize"
                 android:background="@drawable/bg_lower_border"
-                />
+                />//test rishab
 
 
 

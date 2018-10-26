@@ -16,7 +16,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class FragmentTeacherHome extends Fragment {
-    TextView tvName, tvLogout, tvUpdate, tvMyPost;
+    TextView tvName, tvLogout, tvUpdate, tvMyPost, tvForum;
     DocumentReference docRef;
     FirebaseFirestore mDb = FirebaseFirestore.getInstance();
 
@@ -28,6 +28,22 @@ public class FragmentTeacherHome extends Fragment {
 
         //setting up the docref --> this is the main document to edit
         docRef = mDb.collection("teachers").document(nameKey);
+
+
+        //setting up the forum
+        tvForum = v.findViewById(R.id.tv_teacher_forum);
+        tvForum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                Fragment frag = new FragmentTeachersForum();
+                ft.addToBackStack("test");
+                ft.replace(R.id.container_home, frag);
+                ft.commit();
+
+            }
+        });
 
 
         //setting up the tvUpdate

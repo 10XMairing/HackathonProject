@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andevelopers.tenx.hackathonproject.ActivityHome;
+import com.andevelopers.tenx.hackathonproject.ActivityMenuSubs;
 import com.andevelopers.tenx.hackathonproject.FragmentForum;
 import com.andevelopers.tenx.hackathonproject.R;
 import com.andevelopers.tenx.hackathonproject.Utils.Feed;
@@ -29,6 +31,7 @@ public class CustomMenuAdapter extends RecyclerView.Adapter<CustomMenuAdapter.Vi
 
     private Context mCtx;
     private List<String> mList;
+    public static final String USER_RESULT = "keyuser";
 
     public CustomMenuAdapter(Context mCtx, List<String> mList) {
         this.mCtx = mCtx;
@@ -50,19 +53,16 @@ public class CustomMenuAdapter extends RecyclerView.Adapter<CustomMenuAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        final String currentName = mList.get(i);
-        viewHolder.tvName.setText(currentName);
+        final String currentTeacher = mList.get(i);
+        viewHolder.tvName.setText(currentTeacher);
         viewHolder.btnChangeForum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ActivityHome act = (ActivityHome) mCtx;
-                android.support.v4.app.FragmentManager fm = act.getSupportFragmentManager();
-                android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
-                Fragment frag = new FragmentForum();
-                Bundle args = new Bundle();
-                args.putString("key", currentName);
-                ft.replace(R.id.container_home, frag);
-                ft.commit();
+                Intent i = new Intent();
+                i.putExtra(USER_RESULT, currentTeacher);
+                ActivityMenuSubs act = (ActivityMenuSubs) mCtx;
+                act.setResult(Activity.RESULT_OK, i);
+                act.finish();
 
             }
         });

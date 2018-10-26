@@ -82,6 +82,7 @@ public class CustomForumAdapter extends RecyclerView.Adapter<CustomForumAdapter.
 
     public void clearList(){
         mList.clear();
+        notifyDataSetChanged();
     }
 
 }

@@ -39,7 +39,7 @@ public class FragmentStudentHome extends Fragment {
                 startActivity(intent);
             }
         });
-
+        //test rishab
 
 
         //setting up the pager
