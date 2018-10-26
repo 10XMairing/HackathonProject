@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg_lower_border"
     android:orientation="vertical"
@@ -13,6 +13,7 @@
        android:orientation="horizontal"
        >
        <de.hdodenhof.circleimageview.CircleImageView
+           android:id="@+id/civ_profile_img"
            android:layout_width="40dp"
            android:layout_height="40dp"
            android:src="@drawable/ic_circle_profile_24dp"
@@ -36,6 +37,7 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="2 mins ago"
+           android:layout_marginStart="20dp"
            android:layout_gravity="center_vertical"
            android:layout_marginEnd="10dp"
            android:textSize="12sp"
@@ -44,7 +46,7 @@
     <TextView
         android:id="@+id/tv_feed_display"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         tools:text="Teacher's feed will appear here"
         android:layout_margin="10dp"
         android:textAlignment="textStart"
@@ -57,7 +59,7 @@
         android:padding="5dp"
         android:textStyle="italic"
         android:textColor="#0e0700"
-        android:textSize="@dimen/textsize"
+        android:textSize="12sp"
         android:layout_margin="10dp"
         />
 

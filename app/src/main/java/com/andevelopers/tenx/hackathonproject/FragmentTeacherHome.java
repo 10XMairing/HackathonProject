@@ -16,7 +16,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class FragmentTeacherHome extends Fragment {
-    TextView tvName, tvLogout, tvUpdate;
+    TextView tvName, tvLogout, tvUpdate, tvMyPost;
     DocumentReference docRef;
     FirebaseFirestore mDb = FirebaseFirestore.getInstance();
 
@@ -52,6 +52,21 @@ public class FragmentTeacherHome extends Fragment {
         //setting uo the name textview
         tvName = v.findViewById(R.id.tv_name_teacher);
         tvName.setText(nameKey);
+
+        //setting up the my post button
+        tvMyPost = v.findViewById(R.id.tv_my_posts);
+        tvMyPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getFragmentManager();
+                assert fragmentManager != null;
+                FragmentTransaction ftrans = fragmentManager.beginTransaction();
+                Fragment frag =  new FragmentMyPosts();
+                ftrans.replace(R.id.container_home, frag);
+                ftrans.addToBackStack(ActivityHome.TAG_BACKSTACK);
+                ftrans.commit();
+            }
+        });
 
         //setting up the logout button
         tvLogout = v.findViewById(R.id.tv_logout);

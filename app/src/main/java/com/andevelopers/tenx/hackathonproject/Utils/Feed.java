@@ -1,5 +1,7 @@
 package com.andevelopers.tenx.hackathonproject.Utils;
 
+import android.content.Intent;
+
 public class Feed {
 
     private String header;
@@ -10,6 +12,12 @@ public class Feed {
         this.header = header;
         this.text = text;
         this.time = time;
+    }
+
+    public Feed(String header, String text) {
+        this.header = header;
+        this.text = text;
+        time = Long.parseLong("123456");
     }
 
     public String getHeader() {

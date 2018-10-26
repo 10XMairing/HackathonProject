@@ -89,6 +89,7 @@ public class FragmentFeeds extends Fragment{
                 // subbing to the teachers
 
                 for(final String teacherID : subList){
+
                     Log.d("test", "access teacher database  ->"+teacherID);
                     CollectionReference ref = mDb.collection("teachers").document(teacherID).collection("updates");
 

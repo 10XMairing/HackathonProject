@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.andevelopers.tenx.hackathonproject.FragmentFeeds;
+import com.andevelopers.tenx.hackathonproject.FragmentForum;
 import com.andevelopers.tenx.hackathonproject.FragmentSubs;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class CustomPagerAdapter extends FragmentPagerAdapter {
         mList = new ArrayList<>();
         mList.add(new FragmentFeeds());
         mList.add(new FragmentSubs());
+        mList.add(new FragmentForum());
     }
 
     @Override
