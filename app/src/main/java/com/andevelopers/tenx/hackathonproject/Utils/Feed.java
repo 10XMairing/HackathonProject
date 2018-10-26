@@ -4,10 +4,12 @@ public class Feed {
 
     private String header;
     private String text;
+    private Long time;
 
-    public Feed(String header, String text) {
+    public Feed(String header, String text, Long time) {
         this.header = header;
         this.text = text;
+        this.time = time;
     }
 
     public String getHeader() {
@@ -16,5 +18,9 @@ public class Feed {
 
     public String getText() {
         return text;
+    }
+
+    public Long getTime() {
+        return time;
     }
 }

@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,7 @@ public class FragmentPostUpdate extends Fragment {
                 if(!text.equals("")){
                     Map<String, Object> data = new HashMap<>();
                     data.put("text", text);
+                    Log.d("test", text);
                     data.put("time", System.currentTimeMillis());
                     colRef.document().set(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
