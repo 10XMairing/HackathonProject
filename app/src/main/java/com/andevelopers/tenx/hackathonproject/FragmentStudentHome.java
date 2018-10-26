@@ -14,12 +14,14 @@ import android.widget.Button;
 
 import com.andevelopers.tenx.hackathonproject.Adapters.CustomPagerAdapter;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class FragmentStudentHome extends Fragment {
 
-    Button btnLogout;
     ViewPager pager;
     CustomPagerAdapter adapter;
     TabLayout tabLayout;
+    CircleImageView profileIcon;
 
 
 
@@ -29,17 +31,15 @@ public class FragmentStudentHome extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home_student, container, false);
 
-
-
-
-
-        btnLogout = v.findViewById(R.id.btn_logout);
-        btnLogout.setOnClickListener(new View.OnClickListener() {
+        profileIcon = v.findViewById(R.id.civ_student_profile_image);
+        profileIcon.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                goBack();
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ActivityStudenProfile.class);
+                startActivity(intent);
             }
         });
+
 
 
         //setting up the pager

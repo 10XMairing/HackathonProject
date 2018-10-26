@@ -35,21 +35,11 @@
 
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/container_menu"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_below="@id/container_test"
-        android:visibility="gone"
-        >
-
-    </FrameLayout>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_diss_forum"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/container_menu"
+        android:layout_below="@id/container_test"
         android:layout_margin="10dp"
         android:padding="5dp"
         tools:listitem="@layout/vh_student_feed"

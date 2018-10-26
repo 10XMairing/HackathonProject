@@ -56,26 +56,6 @@ public class FragmentFeeds extends Fragment{
         recyclerView.setAdapter(adapter);
 
 
-
-
-        //sub to teachers and display feeds
-
-        //storing the sub list
-        /*refSubs.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    Log.d("test", "retrieve sub success");
-                    List<DocumentSnapshot> list = task.getResult().getDocuments();
-                    for(DocumentSnapshot snap: list){
-                        Log.d("test", "access teacher "+snap.getId());
-                        subList.add(snap.getId());
-                    }
-                }
-            }
-        });*/
-
-
         refSubs.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
@@ -87,7 +67,7 @@ public class FragmentFeeds extends Fragment{
                 }
 
                 // subbing to the teachers
-
+                adapter.clearList();
                 for(final String teacherID : subList){
 
                     Log.d("test", "access teacher database  ->"+teacherID);

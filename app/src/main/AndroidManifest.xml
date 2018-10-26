@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ActivityLogin" />
-        <activity android:name=".FragmentPostUpdate"></activity>
+        <activity android:name=".ActivityStudenProfile"></activity>
     </application>
 
 </manifest>

@@ -50,7 +50,7 @@ public class FragmentTeacherHome extends Fragment {
 
 
         //setting uo the name textview
-        tvName = v.findViewById(R.id.tv_name_teacher);
+        tvName = v.findViewById(R.id.tv_username);
         tvName.setText(nameKey);
 
         //setting up the my post button
