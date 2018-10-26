@@ -1,6 +1,7 @@
 package com.andevelopers.tenx.hackathonproject.Adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class CustomSubsAdapter extends RecyclerView.Adapter<CustomSubsAdapter.ViewHolder> {
 
@@ -57,6 +60,13 @@ public class CustomSubsAdapter extends RecyclerView.Adapter<CustomSubsAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final String currentTeacherID = mList.get(i);
         viewHolder.tvName.setText(currentTeacherID);
+
+        //check tog state
+        SharedPreferences prefs = mCtx.getSharedPreferences("state", MODE_PRIVATE);
+        Boolean restoredText = prefs.getBoolean("togs", false);
+
+
+
         viewHolder.togBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -70,6 +80,12 @@ public class CustomSubsAdapter extends RecyclerView.Adapter<CustomSubsAdapter.Vi
                             if(task.isSuccessful()){
                                 String display = "Subbed to "+currentTeacherID;
                                 Toast.makeText(mCtx, display, Toast.LENGTH_SHORT).show();
+
+                                //save this state
+                                SharedPreferences.Editor editor = ((ActivityHome) mCtx).getSharedPreferences("state", MODE_PRIVATE).edit();
+                                editor.putBoolean("togs", true);
+                                editor.apply();
+
                             }
                         }
                     });
@@ -81,6 +97,12 @@ public class CustomSubsAdapter extends RecyclerView.Adapter<CustomSubsAdapter.Vi
                             String display = "UnSubbed to "+currentTeacherID;
                             notifyDataSetChanged();
                             Toast.makeText(mCtx, display, Toast.LENGTH_SHORT).show();
+                            //save this state
+                            SharedPreferences.Editor editor = ((ActivityHome) mCtx).getSharedPreferences("state", MODE_PRIVATE).edit();
+                            editor.putBoolean("togs", false);
+                            editor.apply();
+
+
                         }
                     });
                 }

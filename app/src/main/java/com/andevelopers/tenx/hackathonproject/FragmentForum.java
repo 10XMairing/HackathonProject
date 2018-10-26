@@ -42,6 +42,7 @@ public class FragmentForum extends Fragment{
     FloatingActionButton fabAddPost;
     ImageView ivTeachersMenu;
     CustomForumAdapter adapter;
+    TextView tvHeaderProf;
     FirebaseFirestore db =FirebaseFirestore.getInstance();
     public static final int REQUEST_CODE_MENU = 100;
     String teacherID;
@@ -58,6 +59,11 @@ public class FragmentForum extends Fragment{
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
+
+        //display teacher name
+        tvHeaderProf = v.findViewById(R.id.tv_teacher_id);
+
+
         //get subs
         CollectionReference refSub = db.collection("students").document(ActivityHome.userID).collection("userSubs");
         refSub.addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -67,9 +73,13 @@ public class FragmentForum extends Fragment{
                 if(list.size() != 0){
                     teacherID= list.get(0).getId();
                     displayForumTeacher(teacherID);
+                    tvHeaderProf.setText(teacherID);
                 }
             }
         });
+
+
+
 
 
         //fab
@@ -90,12 +100,6 @@ public class FragmentForum extends Fragment{
         ivTeachersMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* FragmentManager fm = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.container_home, new FragmentMenu());
-                ft.addToBackStack("MENU");
-                ft.commit();*/
-
                Intent i = new Intent(getActivity(), ActivityMenuSubs.class);
                startActivityForResult(i, REQUEST_CODE_MENU);
 
@@ -119,9 +123,10 @@ public class FragmentForum extends Fragment{
                 List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
 
                 for(DocumentSnapshot snap : list){
+                    String strID = snap.getId();
                     String name = snap.getString("name");
                     String text = snap.getString("text");
-                    adapter.addFeedAndNotify(new Feed(name, text));
+                    adapter.addFeedAndNotify(new Feed(strID, name, text));
                 }
             }
         });
@@ -134,6 +139,7 @@ public class FragmentForum extends Fragment{
             if(resultCode == Activity.RESULT_OK){
                 teacherID = data.getStringExtra(CustomMenuAdapter.USER_RESULT);
                 displayForumTeacher(teacherID);
+                tvHeaderProf.setText(teacherID);
             }
         }
 

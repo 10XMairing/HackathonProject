@@ -34,12 +34,24 @@
 
 
     </LinearLayout>
+    <TextView
+        android:id="@+id/tv_teacher_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Someone"
+        android:layout_below="@id/container_test"
+        android:padding="5dp"
+        android:layout_marginStart="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        />
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_diss_forum"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/container_test"
+        android:layout_below="@id/tv_teacher_id"
         android:layout_margin="10dp"
         android:padding="5dp"
         tools:listitem="@layout/vh_student_feed"

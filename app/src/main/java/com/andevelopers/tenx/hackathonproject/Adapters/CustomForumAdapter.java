@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.andevelopers.tenx.hackathonproject.R;
@@ -47,6 +48,9 @@ public class CustomForumAdapter extends RecyclerView.Adapter<CustomForumAdapter.
         viewHolder.imgProfile.setVisibility(View.GONE);
         viewHolder.tvText.setText(currentFeed.getText());
 
+
+
+
     }
 
     @Override
@@ -55,14 +59,19 @@ public class CustomForumAdapter extends RecyclerView.Adapter<CustomForumAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView tvHeader, tvText;
+        private TextView tvHeader, tvText, tvScore;
         private CircleImageView imgProfile;
+        private ImageView ivDownvote, ivUpvote;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvHeader = itemView.findViewById(R.id.tv_header_feeds);
             tvText = itemView.findViewById(R.id.tv_feed_display);
             imgProfile = itemView.findViewById(R.id.civ_profile_img);
+            tvScore = itemView.findViewById(R.id.tv_vote_score);
+            ivDownvote = itemView.findViewById(R.id.iv_downvote);
+            ivUpvote = itemView.findViewById(R.id.iv_upvote);
         }
     }
 
