@@ -8,6 +8,8 @@
     <color name="grey_chill">#efebef</color>
     <color name="grey_white">#ffffff</color>
     <color name="icon_fill">#ec7e7e</color>
+    <color name="header_fill">#0a5d9c</color>
+    <color name="dark_header">#0e0700</color>
 
 
 </resources>

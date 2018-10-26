@@ -19,6 +19,7 @@ public class FragmentTeacherHome extends Fragment {
     TextView tvName, tvLogout, tvUpdate;
     DocumentReference docRef;
     FirebaseFirestore mDb = FirebaseFirestore.getInstance();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
