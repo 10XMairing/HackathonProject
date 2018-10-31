@@ -85,6 +85,7 @@
                 android:layout_margin="10dp"
                 android:text="Attendance"
                 android:textSize="@dimen/textsize"
+                android:visibility="gone"
                 android:background="@drawable/bg_lower_border"
                 />
             <TextView
@@ -125,6 +126,7 @@
                 android:layout_margin="10dp"
                 android:text="My Subs/ Students"
                 android:textSize="@dimen/textsize"
+                android:visibility="gone"
                 android:background="@drawable/bg_lower_border"
                 />
             <TextView

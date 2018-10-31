@@ -77,6 +77,7 @@ public class CustomFeedAdapter extends RecyclerView.Adapter<CustomFeedAdapter.Vi
 
     public void clearList(){
         mList.clear();
+        notifyDataSetChanged();
     }
 
 }

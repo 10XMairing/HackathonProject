@@ -5,6 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ActivityLogin">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_student_logn"
+        android:text="Classrooms with Android"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:layout_marginBottom="30dp"
+        android:textStyle="bold"
+        />
     <Button
         android:id="@+id/btn_student_logn"
         android:layout_above="@id/btn_teacher_login"
